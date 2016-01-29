@@ -16,11 +16,14 @@ cabal-version:       >=1.10
 library
   hs-source-dirs:      src
   exposed-modules:     Lib
+                       , Lib.Swagger.ResourceListing
   build-depends:       base
                        , aeson
                        , bytestring
+                       , unordered-containers
                        , text
   default-language:    Haskell2010
+  default-extensions:  OverloadedStrings
 
 executable swagger-exe
   hs-source-dirs:      app
@@ -29,15 +32,22 @@ executable swagger-exe
   build-depends:       base
                      , swagger
   default-language:    Haskell2010
+  default-extensions:  OverloadedStrings
 
 test-suite swagger-test
-  type:                exitcode-stdio-1.0
-  hs-source-dirs:      test
-  main-is:             Spec.hs
-  build-depends:       base
-                     , swagger
-  ghc-options:         -threaded -rtsopts -with-rtsopts=-N
-  default-language:    Haskell2010
+  type:                 exitcode-stdio-1.0
+  default-language:     Haskell2010
+  default-extensions:   OverloadedStrings
+  hs-source-dirs:       test
+  ghc-options:          -Wall -threaded -rtsopts -with-rtsopts=-N
+  main-is:              Spec.hs
+  build-depends:        base
+                      , aeson
+                      , bytestring
+                      , text
+                      , hspec
+                      , swagger
+                      , unordered-containers
 
 source-repository head
   type:     git
